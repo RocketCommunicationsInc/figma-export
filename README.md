@@ -47,10 +47,9 @@ npm install @astrouxds/figma-export --save
 
 ## Usage
 
- If you have installed the module globally:
- ```sh
- $ export-icons
-```
+If you're running from this repo,
+
+`npm run import`
 
  If you have installed it locally:
 
@@ -64,6 +63,7 @@ and run
 ```sh
 npm run export-icons
 ```
+
 
 
 ## Credits
