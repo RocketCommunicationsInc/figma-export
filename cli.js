@@ -167,7 +167,6 @@ function getFigmaFile () {
           return
         }
         const shouldGetFrame = isNaN(config.frame) && parseInt(config.frame) !== -1
-        console.log('should', config.frame);
         let iconsArray = page.children
         if (shouldGetFrame) {
           const frameNameArr = config.frame.split('/').filter(Boolean)
@@ -333,7 +332,6 @@ function exportIcons () {
 }
 
 function writeResults(data) {
-  console.log('data', data);
   const results = {}
   data
   .filter(item => item.name.split('/').length === 3)
@@ -352,7 +350,7 @@ function writeResults(data) {
     results[group][style].push(icon)
   })
 
-  fs.writeFile('parsed.json', JSON.stringify(results), err => {
+  fs.writeFile(`${config.metaPath}/icons.json`, JSON.stringify(results), err => {
     if (err) {
       console.error(err)
       return

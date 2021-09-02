@@ -3,6 +3,7 @@ const defaults = {
   page: 'Identity',
   frame: 'Icons',
   iconsPath: 'assets/svg/icons',
+  metaPath: '',
   removeFromName: 'Icon='
 }
 

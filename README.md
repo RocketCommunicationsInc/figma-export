@@ -1,9 +1,6 @@
 # figma-export-icons
 
- <a href="https://www.npmjs.com/package/figma-export-icons"><img src="https://badgen.net/npm/v/figma-export-icons" alt="Version"></a>
- <a href="https://www.npmjs.com/package/figma-export-icons"><img src="https://badgen.net/npm/dm/figma-export-icons" alt="Downloads"></a>
-
- > Command line script to export and download icons from a Figma file using the Figma REST api.
+ > Command line script to export and download Astro's icons from a Figma file using the Figma REST api.
 
 ## Description
 
@@ -22,8 +19,6 @@
   "removeFromName": "Icon="
 }
 ```
-Update: from > v1.3.0 you can set the frame to -1 and it will fetch the icons from the whole page.
-
 
 ## Features
 
@@ -41,13 +36,13 @@ Update: from > v1.3.0 you can set the frame to -1 and it will fetch the icons fr
  Install the cli globally so you can use it on any directory
 
  ```sh
- npm install -g figma-export-icons
+ npm install -g @astrouxds/figma-export
 ```
 
  Or if you prefer install it in your project
 
 ```sh
-npm install figma-export-icons --save
+npm install @astrouxds/figma-export --save
 ```
 
 ## Usage
@@ -70,13 +65,7 @@ and run
 npm run export-icons
 ```
 
-OR
-
-run it directly with:
-```sh
-npx export-icons
-```
 
 ## Credits
 
-This script was developed and is part of our tools at [Qikker Online](https://qikkeronline.com).
+This script was forked from [figma-export-icons](https://github.com/tsimenis/figma-export-icons) and modified.
