@@ -16,6 +16,7 @@
   "page": "Identity",
   "frame": "Icons",
   "iconsPath": "assets/svg/icons",
+  "metaPath": "assets/svg/icons",
   "removeFromName": "Icon="
 }
 ```

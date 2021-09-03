@@ -339,7 +339,7 @@ function writeResults(data) {
     const paths = item.name.split('/')
     const group = paths[0]
     const style = paths[1]
-    const icon = paths[2]
+    const icon = paths[2].replace(/.svg/g,'').replace(/\//g, '-').replace(/ /g,'-').toLowerCase()
     if (!results[group]) {
       results[group] = {}
     }
@@ -350,7 +350,12 @@ function writeResults(data) {
     results[group][style].push(icon)
   })
 
-  fs.writeFile(`${config.metaPath}/icons.json`, JSON.stringify(results), err => {
+  const orderedResults = Object.keys(results).sort().reduce((obj, key) => { 
+    obj[key] = results[key]; 
+    return obj;
+  }, {});
+
+  fs.writeFile(`${config.metaPath}/icons.json`, JSON.stringify(orderedResults), err => {
     if (err) {
       console.error(err)
       return
