@@ -197,11 +197,11 @@ function getFigmaFile () {
   })
 }
 
-function getImages (icons) {
+function getImages (icons, format = 'svg') {
   return new Promise((resolve) => {
     spinner.start('Fetching icon urls')
     const iconIds = icons.map(icon => icon.id).join(',')
-    figmaClient.get(`/images/${config.fileId}?ids=${iconIds}&format=svg`)
+    figmaClient.get(`/images/${config.fileId}?ids=${iconIds}&format=${format}`)
       .then((res) => {
         spinner.succeed()
         const images = res.data.images
@@ -217,7 +217,9 @@ function getImages (icons) {
   })
 }
 
-function downloadImage (url, name) {
+
+
+function downloadImage (url, name, format = 'svg') {
   // name = name.replace(/\//g, '-').replace(/ /g,'-').toLowerCase()
   let nameClean = name
   let directory = config.iconsPath
@@ -236,7 +238,7 @@ function downloadImage (url, name) {
       }
     }
   }
-  const imagePath = path.resolve(directory, `${nameClean}.svg`)
+  const imagePath = path.resolve(directory, `${nameClean}.${format}`)
   const writer = fs.createWriteStream(imagePath)
 
 
@@ -257,7 +259,7 @@ function downloadImage (url, name) {
     writer.on('finish', () => {
       // console.log(`Saved ${name}.svg`, fs.statSync(imagePath).size)
       resolve({
-        name: `${name}.svg`,
+        name: `${name}.${format}`,
         size: fs.statSync(imagePath).size
       })
     })
@@ -331,6 +333,26 @@ function exportIcons () {
   })
 }
 
+function exportImages () {
+  getFigmaFile()
+    .then((res) => {
+      getImages(res, 'png')
+        .then((icons) => {
+          createOutputDirectory()
+          .then(() => {
+              spinner.start('Downloading')
+              const AllIcons = icons.map(icon => downloadImage(icon.image, removeFromName(icon.name), 'png'))
+              Promise.all(AllIcons).then((res) => {
+                spinner.succeed(chalk.cyan.bold('Download Finished!\n'))
+                console.log(`${makeResultsTable(res)}\n`)
+              })
+          })
+        })
+        .catch((err) => {
+          console.log(chalk.red(err))
+        })
+  })
+}
 function writeResults(data) {
   const results = {}
   data
@@ -371,7 +393,12 @@ function run () {
   }
   getConfig().then(() => {
     figmaClient = figma(config.figmaPersonalToken)
-    exportIcons()
+    if (argv.p) {
+      exportImages()
+    } else {
+
+      exportIcons()
+    }
   })
 }
 

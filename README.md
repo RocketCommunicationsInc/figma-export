@@ -65,6 +65,12 @@ and run
 npm run export-icons
 ```
 
+### Saving Pngs
+To save as png and NOT delete the asset directory, use the `-p` flag: 
+
+```
+npm run export-icons -p
+```
 
 
 ## Credits
