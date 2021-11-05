@@ -340,14 +340,12 @@ function exportImages () {
         .then((icons) => {
           createOutputDirectory()
           .then(() => {
-            deleteIcons().then(() => {
               spinner.start('Downloading')
               const AllIcons = icons.map(icon => downloadImage(icon.image, removeFromName(icon.name), 'png'))
               Promise.all(AllIcons).then((res) => {
                 spinner.succeed(chalk.cyan.bold('Download Finished!\n'))
                 console.log(`${makeResultsTable(res)}\n`)
               })
-            })
           })
         })
         .catch((err) => {
