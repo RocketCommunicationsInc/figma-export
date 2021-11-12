@@ -201,7 +201,7 @@ function getImages (icons, format = 'svg') {
   return new Promise((resolve) => {
     spinner.start('Fetching icon urls')
     const iconIds = icons.map(icon => icon.id).join(',')
-    figmaClient.get(`/images/${config.fileId}?ids=${iconIds}&format=${format}`)
+    figmaClient.get(`/images/${config.fileId}?ids=${iconIds}&scale=2format=${format}`)
       .then((res) => {
         spinner.succeed()
         const images = res.data.images
