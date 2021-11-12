@@ -341,7 +341,8 @@ function exportImages () {
           createOutputDirectory()
           .then(() => {
               spinner.start('Downloading')
-              const AllIcons = icons.map(icon => downloadImage(icon.image, removeFromName(icon.name), 'png'))
+              // Filter out anything with a name that starts with _. The file includes some metadata text styles for grouping.
+              const AllIcons = icons.filter(icon => !icon.name.includes('_')).map(icon => downloadImage(icon.image, removeFromName(icon.name), 'png'))
               Promise.all(AllIcons).then((res) => {
                 spinner.succeed(chalk.cyan.bold('Download Finished!\n'))
                 console.log(`${makeResultsTable(res)}\n`)
