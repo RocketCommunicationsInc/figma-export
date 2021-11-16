@@ -280,8 +280,6 @@ function formatSize (size) {
 }
 
 function makeResultsTable (results) {
-  writeResults(results)
-
   ui.div(
     makeRow(
       chalk.cyan.bold(`File`),
@@ -323,6 +321,7 @@ function exportIcons () {
               Promise.all(AllIcons).then((res) => {
                 spinner.succeed(chalk.cyan.bold('Download Finished!\n'))
                 console.log(`${makeResultsTable(res)}\n`)
+                writeResults(res)
               })
             })
           })
