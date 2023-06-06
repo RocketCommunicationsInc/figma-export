@@ -14,6 +14,7 @@
   "figmaPersonalToken": "YOUR_PERSONAL_TOKEN",
   "fileId": "FILE_ID",
   "page": "Identity",
+  "pages": ["Identity", "Widgets", "Buttons"]
   "frame": "Icons",
   "iconsPath": "assets/svg/icons",
   "metaPath": "assets/svg/icons",
@@ -63,6 +64,14 @@ scripts: {
 and run
 ```sh
 npm run export-icons
+```
+
+### Fetching Multiple Pages
+
+To fetch multiple pages, add an array of page names to your icon-config:
+
+```json
+paths: ['Buttons', 'Widgets']
 ```
 
 ### Saving Pngs
